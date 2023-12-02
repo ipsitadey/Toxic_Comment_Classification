@@ -25,8 +25,11 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 * A Transformer Encoder stack trained on Wikipedia and Book Corpus
 * Performs better than deep learning models when finetuned for classification task
 
-Novel processing ideas of BERT
-Way to “fill in the blank” based on context. e.g: *“She bought a _____ of shoes.”* pair 80% 
+**Novel processing ideas of BERT**
+1. Way to “fill in the blank” based on context.<br> &nbsp; &nbsp; e.g: *“She bought a _____ of shoes.”* pair 80%
+2. While current state-of-the-art OpenAI GPT represent *pair* based on *"she bought a"* but not on *"of shoes"*, BERT uses both previous and next context at the same time.
+   
+4. Unique
 
 ## Model Result
 Comparative study of different fine-tuned BERT Models:
