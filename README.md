@@ -27,3 +27,17 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 
 Novel processing ideas of BERT
 Way to “fill in the blank” based on context. e.g: *“She bought a _____ of shoes.”* pair 80% 
+
+## Model Result
+Comparative study of different fine-tuned BERT Models:
+
+| Models                                                          | # of Parameters   | Accuracy %  |
+| --------------------------------------------------------------- | -----------------:| -----------:|
+| DistilBert + Adaptive Model + Discriminative Learning Rate      |   1,783,298       | 91.77       |
+| DistilBert + Gradual Freezing + Discriminative Learning Rate    |   7,680,002       |   87        |
+| BERT with Adapter                                               |   3,009,794       |   90        |
+| BERT Baseline (bert-base-uncased)                               | 109,483,778       |   91        |
+
+Output Analysis:
+* BERT baseline (12 layer) - very high accuracy but computationally expensive.
+* DistilBERT (5 layers) + Discriminative Learning rate + Adaptive model - gives same accuracy but is much light weight, faster and has least number of trainable parameters
