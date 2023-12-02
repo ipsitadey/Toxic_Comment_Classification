@@ -26,12 +26,14 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 * Performs better than deep learning models when finetuned for classification task
 
 **Novel processing ideas of BERT**
-1. Way to “fill in the blank” based on context.<br> &nbsp; &nbsp; e.g: *“She bought a _____ of shoes.”* pair 80%
-2. While current state-of-the-art OpenAI GPT represent *pair* based on *"she bought a"* but not on *"of shoes"*, BERT uses both previous and next context at the same time.
-   
-4. Unique
+*   Way to “fill in the blank” based on context. e.g: *“She bought a _____ of shoes.”* &rarr; *pair*.<br>While current state-of-the-art OpenAI GPT represent *pair* based on *"she bought a"* but not on *"of shoes"*, BERT uses both previous and next context at the same time.<br>
+![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/BERTvsOpenAI.ppm)
+*   Unique input token embedding<br>
+![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/token_embedding.png)
+*   Train Strategy: Masked LM -Randomly replace 15% of the words with a [MASK] token and try to predict them.
 
-## Model Result
+
+    ## Model Result
 Comparative study of different fine-tuned BERT Models:
 
 | Models                                                          | # of Parameters   | Accuracy %  |
