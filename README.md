@@ -19,21 +19,42 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 
 &ensp;&ensp;**Masked Language Modeling:** During pretraining, BERT uses a technique called masked language modeling (MLM). It randomly masks some of the words in a sentence and then learns to predict the masked words based on the surrounding context. This helps BERT understand the relationships between words and their context.
 
-
-
 * General purpose Bidirectional Contextual language model
 * A Transformer Encoder stack trained on Wikipedia and Book Corpus
 * Performs better than deep learning models when finetuned for classification task
 
-**Novel processing ideas of BERT**
+&ensp;&ensp;**Novel processing ideas of BERT**
 *   Way to “fill in the blank” based on context. e.g: *“She bought a _____ of shoes.”* &rarr; *pair*.<br>While current state-of-the-art OpenAI GPT represent *pair* based on *"she bought a"* but not on *"of shoes"*, BERT uses both previous and next context at the same time.<br>
 ![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/BERTvsOpenAI.ppm)
 *   Unique input token embedding<br>
 ![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/token_embedding.png)
 *   Train Strategy: Masked LM -Randomly replace 15% of the words with a [MASK] token and try to predict them.
 
+## Experiments (Fine Tuning BERT)
 
-    ## Model Result
+&ensp;&ensp;**Adapter Module Transfer Learning**
+* Add a new modules
+* Freeze original params and Train only new ones<br>
+  $` \begin{multline}
+Adapter(h_{j}) = W^{D}(non-linearity(W^{E}h_{j}) + b_{E}) + b_{D}\\
+W^{E}: projects\ the\ input\ to\ a\ smaller\ space\\
+W^{D}: projects\ the\ input\ to\ the\ original\ size\\
+b: are\ biases
+\end{multline}
+ `$
+
+[![Adapter BERT](images/adapter_bert.webp)](https://medium.com/dair-ai/adapters-a-compact-and-extensible-transfer-learning-method-for-nlp-6d18c2399f62)
+
+&ensp;&ensp;**DistilBERT – distil versioned BERT**
+
+
+&ensp;&ensp;**Discriminative Fine Tuning**
+
+
+&ensp;&ensp;**BERT with LSTM**
+
+
+## Experiment Result
 Comparative study of different fine-tuned BERT Models:
 
 | Models                                                          | # of Parameters   | Accuracy %  |
