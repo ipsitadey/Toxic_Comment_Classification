@@ -89,6 +89,12 @@ Comparative study of different fine-tuned BERT Models:
 
 Output Analysis:
 * BERT baseline (12 layer) - very high accuracy but computationally expensive.
-* DistilBERT (5 layers) + Discriminative Learning rate + Adaptive model - gives same accuracy but is much light weight, faster and has least number of trainable parameters.
+* DistilBERT (6 layers) + Discriminative Learning rate + Adaptive model - gives same accuracy but is much light weight, faster and has least number of trainable parameters.
 * Time - Final tuned model takes 1 hour and yet achieves 91% accuracy unlike baseline(5 hours)<br><br>
 ![DistilBERT with Adapter](images/distilbert_adapter.png)
+
+## Resources
+1. <a href="https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270">BERT Explained: State of the art language model for NLP</a>
+2. <a href="https://medium.com/dair-ai/adapters-a-compact-and-extensible-transfer-learning-method-for-nlp-6d18c2399f62">Adapters: A Compact and Extensible Transfer Learning Method for NLP</a>
+3. <a href="https://medium.com/huggingface/distilbert-8cf3380435b5">Smaller, faster, cheaper, lighter: Introducing DistilBERT, a distilled version of BERT</a>
+4. <a href="https://paperswithcode.com/method/discriminative-fine-tuning">Discriminative Fine-Tuning</a>
