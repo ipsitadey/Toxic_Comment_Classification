@@ -19,20 +19,24 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 
 &ensp;&ensp;**Masked Language Modeling:** During pretraining, BERT uses a technique called masked language modeling (MLM). It randomly masks some of the words in a sentence and then learns to predict the masked words based on the surrounding context. This helps BERT understand the relationships between words and their context.
 
+&ensp;&ensp;**Advantages of BERT over other language models:**
 * General purpose Bidirectional Contextual language model
 * A Transformer Encoder stack trained on Wikipedia and Book Corpus
 * Performs better than deep learning models when finetuned for classification task
 
 ## Novel processing ideas of BERT
 *   Way to “fill in the blank” based on context. e.g: *“She bought a _____ of shoes.”* &rarr; *pair*.<br>While current state-of-the-art OpenAI GPT represent *pair* based on *"she bought a"* but not on *"of shoes"*, BERT uses both previous and next context at the same time.<br>
-![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/BERTvsOpenAI.ppm)
+<img src="images/BERTvsOpenAI.ppm" alt="Adapter BERT" width="600"/>
+
 *   Unique input token embedding<br>
-![alt text](https://github.com/ipsitadey/Toxic_Comment_Classification/blob/main/images/token_embedding.png)
+<img src="images/token_embedding.png" alt="Adapter BERT" width="600"/>
+
 *   Train Strategy: Masked LM -Randomly replace 15% of the words with a [MASK] token and try to predict them.
+<img src="images/next_pred.png" alt="Adapter BERT" width="600"/>
 
-## Experiments (Fine Tuning BERT)
+## Different BERT Fine Tuning Approaches:
 
-&ensp;&ensp;**Adapter Module Transfer Learning**
+&ensp;&ensp;**1. Adapter Module Transfer Learning**
 * Add a new modules
 * Freeze original params and Train only new ones<br><br>
 $` 
@@ -45,16 +49,16 @@ $`
 \end{align*}
 `$
 
-[![Adapter BERT](images/adapter_bert.webp)](https://medium.com/dair-ai/adapters-a-compact-and-extensible-transfer-learning-method-for-nlp-6d18c2399f62)
+<a href="https://medium.com/dair-ai/adapters-a-compact-and-extensible-transfer-learning-method-for-nlp-6d18c2399f62"><img src="images/adapter_bert.webp" alt="Adapter BERT" width="600"/></a>
 
-&ensp;&ensp;**DistilBERT – distil versioned BERT**
+&ensp;&ensp;**2. DistilBERT – distil versioned BERT**
 * Smaller, faster, cheaper model.
 * Compress BERT by 40% , retaining 97% language understanding capability.
 * Token-type embeddings removed.
 * Layers reduced by a factor of 2.
 * Cross Entropy Loss: $` L = -\sum_{i} t_{i} * log(s_{i}) `$
 
-&ensp;&ensp;**Discriminative Fine Tuning**
+&ensp;&ensp;**3. Discriminative Fine Tuning**
 * Tuning with Varying Learning Rate.
 * Different layers capture different types of information.
 * Instead of using regular SGD, use L different learning rates in decreasing order while moving to lower layers<br>
@@ -65,24 +69,26 @@ $`
 \end{align*}
 `$
 
-&ensp;&ensp;**BERT with LSTM**
+&ensp;&ensp;**4. BERT with LSTM**
 * Feature Based Tuning.
 * Extract features by gradual freezing of DistilBERT.
 * Classification using LSTM to preserve long distance dependency of words.<\br>
 
-![Adapter BERT](images/bert_lstm.png)
+<img src="images/bert_lstm.png" alt="Adapter BERT" width="600"/>
+
 
 ## Experiment Result
 Comparative study of different fine-tuned BERT Models:
 
-| Models                                                          | # of Parameters   | Accuracy %  |
-| --------------------------------------------------------------- | -----------------:| -----------:|
-| DistilBert + Adaptive Model + Discriminative Learning Rate      |   1,783,298       | 91.77       |
-| DistilBert + Gradual Freezing + Discriminative Learning Rate    |   7,680,002       |   87        |
-| BERT with Adapter                                               |   3,009,794       |   90        |
-| BERT Baseline (bert-base-uncased)                               | 109,483,778       |   91        |
+| Models                                                          | # of Parameters to Train  | Accuracy %  |
+| --------------------------------------------------------------- | -------------------------:| -----------:|
+| DistilBert + Adaptive Model + Discriminative Learning Rate      |   1,783,298               | 91.77       |
+| DistilBert + Gradual Freezing + Discriminative Learning Rate    |   7,680,002               |   87        |
+| BERT with Adapter                                               |   3,009,794               |   90        |
+| BERT Baseline (bert-base-uncased)                               | 109,483,778               |   91        |
 
 Output Analysis:
 * BERT baseline (12 layer) - very high accuracy but computationally expensive.
-* DistilBERT (5 layers) + Discriminative Learning rate + Adaptive model - gives same accuracy but is much light weight, faster and has least number of trainable parameters<br><br>
+* DistilBERT (5 layers) + Discriminative Learning rate + Adaptive model - gives same accuracy but is much light weight, faster and has least number of trainable parameters.
+* Time - Final tuned model takes 1 hour and yet achieves 91% accuracy unlike baseline(5 hours)<br><br>
 ![DistilBERT with Adapter](images/distilbert_adapter.png)
